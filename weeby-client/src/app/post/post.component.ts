@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Post} from './post';
+import {PostRestService} from '../logic/post.rest.service';
 
 @Component({
   selector: 'app-post',
@@ -8,16 +9,20 @@ import {Post} from './post';
 })
 export class PostComponent implements OnInit {
 
-  public post: Post;
+  @Input()
+  public posts: Post [];
 
-  constructor() {
-
-    this.post =
-      Post.from('https://material.angular.io/assets/img/examples/shiba1.jpg',
-        'Shiba', 'Dog breed', 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/04/11/12/package-holiday-credit-grafner.jpg?w968h681',
-        'My Vacations #Vacations #Beach #Sunshine');
+  constructor(private postRestService: PostRestService) {
+    this.posts = [];
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.loadPosts();
+  }
 
+  loadPosts(): void {
+    this.postRestService.findAllPosts().subscribe((posts: Post[]) => {
+      this.posts = posts;
+    });
+  }
 }
