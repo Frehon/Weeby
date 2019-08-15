@@ -15,7 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>weeby-server</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Weeby Server</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -48,6 +48,11 @@
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
@@ -76,7 +81,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.1.7.RELEASE</version>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -101,7 +105,8 @@
                             <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/weeby-client/src/main/web/dist/weeby-client/</directory>
+                                    <directory>${project.basedir}/weeby-client/src/main/web/dist/weeby-client/
+                                    </directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -110,5 +115,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
