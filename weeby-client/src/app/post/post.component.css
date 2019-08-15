@@ -18,6 +18,7 @@
   display: flex;
   text-align: center;
   height: inherit;
+  font-family: "Arial Black";
 }
 
 .material-icons.md-40 {

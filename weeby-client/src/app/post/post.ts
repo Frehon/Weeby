@@ -15,6 +15,8 @@ export class Post {
     post.userNick = userNick;
     post.photo = photo;
     post.photoDescription = photoDescription;
+    post.comments = [];
+    post.likes = [];
     return post;
   }
 

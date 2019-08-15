@@ -14,14 +14,10 @@ export class PostComponent implements OnInit {
 
     this.post =
       Post.from('https://material.angular.io/assets/img/examples/shiba1.jpg',
-        'Shiba', 'Dog breed', 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-        'The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.\n' +
-        '    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally\n' +
-        '    bred for hunting.');
+        'Shiba', 'Dog breed', 'https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/04/11/12/package-holiday-credit-grafner.jpg?w968h681',
+        'My Vacations #Vacations #Beach #Sunshine');
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
 }
