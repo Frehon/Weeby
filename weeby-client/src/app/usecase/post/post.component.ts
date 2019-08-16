@@ -21,8 +21,10 @@ export class PostComponent implements OnInit {
   }
 
   loadPosts(): void {
-    this.postRestService.findAllPosts().subscribe((posts: Post[]) => {
-      this.posts = posts;
-    });
+    this.postRestService
+      .findAllPosts()
+      .subscribe((posts: Post[]) => {
+        this.posts = posts;
+      });
   }
 }

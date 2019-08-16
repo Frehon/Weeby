@@ -9,6 +9,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {RouterModule, Routes} from '@angular/router';
+
+export const routes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'all', component: PostComponent},
+  {path: '', redirectTo: '/login', pathMatch: 'full'}
+];
 
 @NgModule({
   declarations: [
@@ -17,6 +24,7 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
     LoginComponent
   ],
   imports: [
+    RouterModule.forRoot(routes, {enableTracing: true}),
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
@@ -34,5 +42,3 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 })
 export class AppModule {
 }
-
-

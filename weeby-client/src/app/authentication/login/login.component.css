@@ -1,3 +1,11 @@
+.posts-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .mat-card {
   border: #0074D9 groove 1px;
   margin-top: 20%;

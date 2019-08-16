@@ -1,18 +1,6 @@
-.body {
-  background-color: #5CDB95;
-}
-
-.login-container {
+.container {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: center;
-}
-
-.posts-container {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
 }
