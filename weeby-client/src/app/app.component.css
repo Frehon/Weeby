@@ -1,4 +1,15 @@
-.container {
+.body {
+  background-color: #5CDB95;
+}
+
+.login-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.posts-container {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;

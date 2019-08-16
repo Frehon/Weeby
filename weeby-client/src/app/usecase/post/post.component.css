@@ -1,5 +1,6 @@
 .mat-card {
   border: black solid 1px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .card-header {
@@ -18,7 +19,8 @@
   display: flex;
   text-align: center;
   height: inherit;
-  font-family: "Arial Black";
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: bold;
 }
 
 .material-icons.md-40 {

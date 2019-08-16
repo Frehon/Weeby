@@ -7,7 +7,7 @@ import {catchError} from 'rxjs/operators';
 @Injectable()
 export class PostRestService {
 
-  private readonly baseUrl = '/post';
+  private readonly baseUrl = 'api/post';
 
   constructor(private http: HttpClient) {
   }

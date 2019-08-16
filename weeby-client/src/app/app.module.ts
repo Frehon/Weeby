@@ -1,14 +1,14 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
 import {AppComponent} from './app.component';
+import {MatButtonModule, MatButtonToggleModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {PostComponent} from './usecase/post/post.component';
+import {PostRestService} from './usecase/logic/post.rest.service';
+import {LoginComponent} from './authentication/login/login.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatButtonToggleModule, MatCardModule, MatIconModule} from '@angular/material';
-import { PostComponent } from './usecase/post/post.component';
-import {PostRestService} from './usecase/logic/post.rest.service';
 import {HttpClientModule} from '@angular/common/http';
-import { LoginComponent } from './authentication/login/login.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -24,10 +24,15 @@ import { LoginComponent } from './authentication/login/login.component';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    AngularFontAwesomeModule
   ],
   providers: [PostRestService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+
+
