@@ -10,6 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {RouterModule, Routes} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -24,7 +25,7 @@ export const routes: Routes = [
     LoginComponent
   ],
   imports: [
-    RouterModule.forRoot(routes, {enableTracing: true}),
+    RouterModule.forRoot(routes),
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
@@ -35,7 +36,8 @@ export const routes: Routes = [
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [PostRestService],
   bootstrap: [AppComponent]
