@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from './post';
-import {PostRestService} from '../logic/post.rest.service';
+import {PostRestService} from '../logic/post-rest.service';
 
 @Component({
   selector: 'app-post',

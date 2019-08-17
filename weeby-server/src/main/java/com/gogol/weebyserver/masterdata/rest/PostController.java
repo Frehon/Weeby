@@ -1,7 +1,7 @@
 package com.gogol.weebyserver.masterdata.rest;
 
 import com.gogol.weebyserver.masterdata.logic.api.UcFindAllPosts;
-import com.gogol.weebyserver.masterdata.model.Post;
+import com.gogol.weebyserver.masterdata.model.dto.PostDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class PostController {
     private UcFindAllPosts ucFindAllPosts;
 
     @GetMapping(value = "/all")
-    public ResponseEntity<Set<Post>> findAll() {
+    public ResponseEntity<Set<PostDto>> findAll() {
         return new ResponseEntity<>(ucFindAllPosts.findAll(), HttpStatus.OK);
     }
 

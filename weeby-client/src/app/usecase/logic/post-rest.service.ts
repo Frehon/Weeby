@@ -4,7 +4,9 @@ import {Observable, throwError} from 'rxjs';
 import {Post} from '../post/post';
 import {catchError} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PostRestService {
 
   private readonly baseUrl = 'api/post';

@@ -1,7 +1,6 @@
 import {AppComponent} from './app.component';
 import {MatButtonModule, MatButtonToggleModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
 import {PostComponent} from './usecase/post/post.component';
-import {PostRestService} from './usecase/logic/post.rest.service';
 import {LoginComponent} from './authentication/login/login.component';
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
@@ -11,6 +10,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {RouterModule, Routes} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
+import {PostRestService} from './usecase/logic/post-rest.service';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},

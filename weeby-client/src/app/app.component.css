@@ -1,3 +1,6 @@
+.bg {
+  background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+}
 .container {
   display: flex;
   flex-wrap: nowrap;

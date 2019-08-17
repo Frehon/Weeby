@@ -1,11 +1,11 @@
 package com.gogol.weebyserver.masterdata.logic.api;
 
-import com.gogol.weebyserver.masterdata.model.Post;
+import com.gogol.weebyserver.masterdata.model.dto.PostDto;
 
 import java.util.Set;
 /**
  * Finds all posts for all users
  */
 public interface UcFindAllPosts {
-    Set<Post> findAll();
+    Set<PostDto> findAll();
 }

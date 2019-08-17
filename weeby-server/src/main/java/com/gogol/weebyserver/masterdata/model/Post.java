@@ -1,8 +1,5 @@
 package com.gogol.weebyserver.masterdata.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,43 +10,91 @@ import java.util.Set;
 public class Post {
 
     @Id
-    @Getter
-    @Setter
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "avatar_url")
-    @Getter
-    @Setter
     private String avatar;
 
     @Column
-    @Getter
-    @Setter
     private String userName;
 
     @Column
-    @Getter
-    @Setter
     private String userNick;
 
     @Column(name = "photo_url")
-    @Getter
-    @Setter
     private String photo;
 
     @Column
-    @Getter
-    @Setter
     private String photoDescription;
 
     @ElementCollection
-    @Getter
-    @Setter
     private Set<String> likes = new HashSet<>();
 
     @ElementCollection
-    @Getter
-    @Setter
     private List<String> comments = new ArrayList<>();
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public String getAvatar() {
+        return this.avatar;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public String getUserNick() {
+        return this.userNick;
+    }
+
+    public String getPhoto() {
+        return this.photo;
+    }
+
+    public String getPhotoDescription() {
+        return this.photoDescription;
+    }
+
+    public Set<String> getLikes() {
+        return this.likes;
+    }
+
+    public List<String> getComments() {
+        return this.comments;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setUserNick(String userNick) {
+        this.userNick = userNick;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void setPhotoDescription(String photoDescription) {
+        this.photoDescription = photoDescription;
+    }
+
+    public void setLikes(Set<String> likes) {
+        this.likes = likes;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
 }
