@@ -2,9 +2,21 @@ image: docker:latest
 
 services:
   - docker:dind
+  - mysql:latest
+
+variables:
+  MYSQL_DATABASE: weeby
+  MYSQL_ROOT_PASSWORD: weeby2019
 
 stages:
+  - mysql-setup
   - build-server
+
+connect:
+  image: mysql
+  stage: mysql-setup
+  script:
+    - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
 
 maven-build:
   image: maven:3-jdk-8
@@ -14,4 +26,4 @@ maven-build:
   artifacts:
     paths:
       - target/*.jar
-      
+
