@@ -19,7 +19,7 @@ maven-build:
     - mvn clean package -B -DskipTests
   artifacts:
     paths:
-      - weeby.war
+      - /builds/Frehon/Weeby/weeby-server/target/weeby.war
 
 build docker:
   image: docker:dind
