@@ -19,10 +19,10 @@ maven-build:
     - mvn clean package -B -DskipTests
   artifacts:
     paths:
-      - target/weeby.war
-
+      - /builds/Frehon/Weeby/weeby-server/target/weeby.war
+      
 build docker:
   image: docker:dind
   stage: build-docker
-  script: docker build -t target/weeby.war .
+  script: docker build -t weeby-backend  /builds/Frehon/Weeby/weeby-server/target/weeby.war
 
