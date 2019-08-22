@@ -9,20 +9,20 @@ variables:
   MYSQL_ROOT_PASSWORD: weeby2019
 
 stages:
-  - mysql-setup
   - build-server
-
-connect:
-  image: mysql
-  stage: mysql-setup
-  script:
-    - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+  - build-docker
 
 maven-build:
   image: maven:3-jdk-8
   stage: build-server
   script:
-    - mvn clean package -B
+    - mvn clean package -B -DskipTests
   artifacts:
     paths:
-      - target/*.jar
+      - weeby.war
+
+build docker:
+  image: docker:dind
+  stage: build-docker
+  script: docker build weeby.war .
+
