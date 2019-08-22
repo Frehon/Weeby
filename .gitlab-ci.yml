@@ -3,10 +3,6 @@ image: docker:latest
 services:
   - docker:dind
 
-variables:
-  MYSQL_DATABASE: weeby
-  MYSQL_ROOT_PASSWORD: weeby2019
-
 stages:
   - build-server
   - build-docker
