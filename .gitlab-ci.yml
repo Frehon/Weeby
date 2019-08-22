@@ -11,6 +11,7 @@ maven-build:
   image: maven:3-jdk-8
   stage: build-server
   script:
+    - cd weeby-server
     - mvn clean package -B -DskipTests
   artifacts:
     paths:
@@ -19,7 +20,7 @@ maven-build:
 build docker:
   stage: build-docker
   script:
-    - cp /builds/Frehon/Weeby/weeby-server/target/* weeby-server
+    - cp target/* weeby-server
     - docker login -u tomaszgogolewski -p TIxao16janakonda666 docker.io
     - docker build -t tomaszgogolewski/weeby-server .
     - docker push index.docker.io/tomaszgogolewski/weeby-server:latest
