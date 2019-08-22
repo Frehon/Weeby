@@ -24,5 +24,5 @@ maven-build:
 build docker:
   image: docker:dind
   stage: build-docker
-  script: docker build -t weeby-backend  /builds/Frehon/Weeby/weeby-server/target/weeby.war
+  script: docker build -t weeby-backend .
 
