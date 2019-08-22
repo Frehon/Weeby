@@ -3,9 +3,13 @@ image: docker:latest
 services:
   - docker:dind
 
+variables:
+  DOCKER_DRIVER: overlay
+
 stages:
   - build-server
   - build-docker
+  - deploy-backend-to-openshift
 
 maven-build:
   image: maven:3-jdk-11
@@ -25,5 +29,17 @@ build docker:
     - docker login -u tgogolewski -p TIxao16janakonda666 docker.io
     - docker build -t tgogolewski/weeby-server .
     - docker push index.docker.io/tgogolewski/weeby-server:latest
+
+deploy-backend-to-openshift:
+  image: openshift/origin-cli
+  stage: deploy-backend-to-openshift
+  script:
+    - oc login https://api.pro-eu-west-1.openshift.com --token=iC383jxzSh0Ht2zBDVRtwEBvXPPNcVOiGcAFd9n_yPQ
+    - oc project weeby
+    - oc new-app index.docker.io/tgogolewski/weeby-server:latest
+    - oc expose service weeby-server
+
+
+
 
 
