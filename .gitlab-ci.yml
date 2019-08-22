@@ -2,7 +2,6 @@ image: docker:latest
 
 services:
   - docker:dind
-  - mysql:latest
 
 variables:
   MYSQL_DATABASE: weeby
@@ -22,7 +21,11 @@ maven-build:
       - /builds/Frehon/Weeby/weeby-server/target/weeby.war
       
 build docker:
-  image: docker:dind
   stage: build-docker
-  script: docker build -t weeby-backend .
+  script:
+    - cp /builds/Frehon/Weeby/weeby-server/target/* weeby-server
+    - docker login -u tomaszgogolewski -p TIxao16janakonda666 docker.io
+    - docker build -t tomaszgogolewski/weeby-server .
+    - docker push index.docker.io/tomaszgogolewski/weeby-server:latest
+
 
