@@ -16,11 +16,11 @@ export class PostComponent implements OnInit {
     this.posts = [];
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadPosts();
   }
 
-  loadPosts(): void {
+  public loadPosts(): void {
     this.postRestService
       .findAllPosts()
       .subscribe((posts: Post[]) => {

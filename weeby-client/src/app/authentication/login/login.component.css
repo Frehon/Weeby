@@ -9,11 +9,24 @@
 .mat-card {
   border: #0074D9 groove 1px;
   margin-top: 20%;
-  margin-bottom: 20%;
+  margin-bottom: 25%;
   align-content: center;
   min-width: 600px;
   min-height: 300px;
   font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: #6699FF !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: #0074D9 !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: #0074D9 !important;;
 }
 
 .mat-card-title {

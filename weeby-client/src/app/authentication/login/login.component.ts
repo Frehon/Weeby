@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Observable, throwError, of} from 'rxjs';
+import {Errors} from '../model/errors';
+import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +15,10 @@ export class LoginComponent implements OnInit {
 
   private loginForm: FormGroup;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private toastr: ToastrService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.createLoginForm();
   }
 
@@ -25,16 +29,32 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login(formValues: any): void {
-    if(this.loginForm.valid){
-      const email = formValues['email'];
-      const password = formValues['password'];
-      /**
-       * login logic.
-       */
+  public login(): void {
+    this.validateForm().pipe(
+      catchError((error: Observable<never>) => {
+        this.toastr.error(Errors.invalidForm);
+        return throwError(error);
+      }))
+      .subscribe(() => {
+        this.router.navigate(['/all'])
+          .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
+      });
 
-      const callback: Promise<boolean> = this.router.navigate(['/all']);
-      callback.then(() => console.log('Redirected successfully'));
+    const formValues: { email: string, password: string } = this.loginForm.getRawValue();
+    /**
+     * TODO: Login Logic after creating a registration.
+     */
+  }
+
+  public register(): void {
+    this.router.navigate(['/registry'])
+      .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
+  }
+
+  private validateForm(): Observable<boolean> {
+    if (!this.loginForm.valid) {
+      return throwError(Errors.invalidForm);
     }
+    return of(true);
   }
 }

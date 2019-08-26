@@ -42,6 +42,13 @@ public class StartupTestDataLoader implements ApplicationListener<ApplicationRea
         post2.setUserNick("#Shibbys opponent");
         post2.setPhoto("https://www.budgetdirect.com.au/blog/wp-content/uploads/2018/03/Thailand-Travel-Guide-Hero-1-951x512.jpg");
         post2.setPhotoDescription("My Vacations are better than yours! #Vacations #Beach #Sunshine");
-        postRepository.saveAll(Arrays.asList(post1, post2));
+
+        Post post3 = new Post();
+        post3.setAvatar("https://images-na.ssl-images-amazon.com/images/I/61qiyxLyMwL._SY450_.jpg");
+        post3.setUserName("Bulldog");
+        post3.setUserNick("#Shibbys opponent");
+        post3.setPhoto("http://static1.eskypartners.com/travelguide/Fotolia_65148978_Subscription_Monthly_M.jpg");
+        post3.setPhotoDescription("My Vacations are the best guys! #Vacations #Bulldog #Thailand");
+        postRepository.saveAll(Arrays.asList(post1, post2, post3));
     }
 }
