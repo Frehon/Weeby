@@ -1,1 +1,26 @@
-<p>registry works!</p>
+<mat-card>
+  <mat-card-title>Registry a new Weeby Account</mat-card-title>
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <mat-label>User Name</mat-label>
+      <input matInput placeholder="please type a nick">
+      <mat-icon matPrefix>how_to_reg</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="please type an email">
+      <mat-icon matPrefix>email</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="please type a password">
+      <mat-icon matPrefix>lock</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password confirmation</mat-label>
+      <input matInput placeholder="please type a password">
+      <mat-icon matPrefix>lock_open</mat-icon>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-button-toggle class="registryButton">Register</mat-button-toggle>
+</mat-card>
