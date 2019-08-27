@@ -14,7 +14,7 @@ export class PostRestService {
   constructor(private http: HttpClient) {
   }
 
-  findAllPosts(): Observable<Post[]> {
+  public findAllPosts(): Observable<Post[]> {
     const detailUrl = '/all';
     return this.http
       .get<Post[]>(this.baseUrl + detailUrl)

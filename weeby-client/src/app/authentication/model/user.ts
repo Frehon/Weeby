@@ -8,7 +8,7 @@ export class User {
     return this._name;
   }
 
-  set name(value: string): void {
+  set name(value: string) {
     this._name = value;
   }
 
@@ -16,7 +16,7 @@ export class User {
     return this._email;
   }
 
-  set email(value: string): void {
+  set email(value: string) {
     this._email = value;
   }
 
@@ -24,7 +24,7 @@ export class User {
     return this._password;
   }
 
-  set password(value: string): void {
+  set password(value: string) {
     this._password = value;
   }
 }

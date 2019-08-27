@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
 import {Errors} from '../model/errors';
+import {AuthenticationService} from '../logic/authentication.service';
+import {User} from '../model/user';
 
 @Component({
   selector: 'app-registry',
@@ -12,7 +14,7 @@ import {Errors} from '../model/errors';
 export class RegistryComponent implements OnInit {
   private registryForm: FormGroup;
 
-  constructor(private toastr: ToastrService) {
+  constructor(private authenticationService: AuthenticationService, private toastr: ToastrService) {
   }
 
   public ngOnInit(): void {
@@ -34,17 +36,24 @@ export class RegistryComponent implements OnInit {
     } else {
       this.toastr.error(Errors.invalidForm);
     }
-
-    /**
-     * TODO: Registry Logic after creating a registration.
-     */
+    this.createUser();
   }
 
   private comparePasswords(): void {
-    const password: AbstractControl = this.registryForm.controls.password.value;
-    const passwordConfirmation: AbstractControl = this.registryForm.controls.passwordConfirmation.value;
-    if (password !== passwordConfirmation) {
+    const passwords: { password: string, passwordConfirmation: string } = this.registryForm.getRawValue();
+
+    if (passwords.password !== passwords.passwordConfirmation) {
       this.toastr.error(Errors.passwordsNotMatch);
     }
+  }
+
+  private createUser(): void {
+    const userData: { userName: string, email: string, password: string } = this.registryForm.getRawValue();
+    this.authenticationService.registry(userData)
+      .subscribe((user: User) => {
+        console.log('name' + user.name);
+        console.log('password' + user.password);
+        console.log('email' + user.email);
+      });
   }
 }
