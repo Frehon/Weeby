@@ -9,7 +9,7 @@ import {catchError} from 'rxjs/operators';
 })
 export class AuthenticationService {
 
-  private readonly baseUrl = 'api/user';
+  private readonly baseUrl = 'api/auth';
 
   constructor(private http: HttpClient) {
   }

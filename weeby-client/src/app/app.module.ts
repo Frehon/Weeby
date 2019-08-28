@@ -52,6 +52,7 @@ export const routes: Routes = [
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
+      extendedTimeOut: 3000
     })
   ],
   providers: [PostRestService],

@@ -4,6 +4,9 @@ import {ToastrService} from 'ngx-toastr';
 import {Errors} from '../model/errors';
 import {AuthenticationService} from '../logic/authentication.service';
 import {User} from '../model/user';
+import {catchError} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-registry',
@@ -33,10 +36,10 @@ export class RegistryComponent implements OnInit {
   public registry(): void {
     if (this.registryForm.valid) {
       this.comparePasswords();
+      this.createUser();
     } else {
       this.toastr.error(Errors.invalidForm);
     }
-    this.createUser();
   }
 
   private comparePasswords(): void {
@@ -50,10 +53,13 @@ export class RegistryComponent implements OnInit {
   private createUser(): void {
     const userData: { userName: string, email: string, password: string } = this.registryForm.getRawValue();
     this.authenticationService.registry(userData)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.toastr.error(error.error, 'Can not create account. Please check the data');
+          return throwError(error);
+        }))
       .subscribe((user: User) => {
-        console.log('name' + user.name);
-        console.log('password' + user.password);
-        console.log('email' + user.email);
+        this.toastr.success('User has been created successfully! Redirecting to login page.');
       });
   }
 }
