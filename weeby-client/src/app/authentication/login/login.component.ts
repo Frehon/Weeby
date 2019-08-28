@@ -5,6 +5,9 @@ import {ToastrService} from 'ngx-toastr';
 import {Observable, throwError, of} from 'rxjs';
 import {Errors} from '../model/errors';
 import {catchError} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {User} from '../model/user';
+import {AuthenticationService} from '../logic/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -15,18 +18,11 @@ export class LoginComponent implements OnInit {
 
   private loginForm: FormGroup;
 
-  constructor(private router: Router, private toastr: ToastrService) {
+  constructor(private authenticationService: AuthenticationService, private router: Router, private toastr: ToastrService) {
   }
 
   public ngOnInit(): void {
     this.createLoginForm();
-  }
-
-  private createLoginForm(): void {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    });
   }
 
   public login(): void {
@@ -34,21 +30,35 @@ export class LoginComponent implements OnInit {
       catchError((error: Observable<never>) => {
         this.toastr.error(Errors.invalidForm);
         return throwError(error);
-      }))
-      .subscribe(() => {
-        this.router.navigate(['/all'])
-          .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
-      });
+      }));
 
-    const formValues: { email: string, password: string } = this.loginForm.getRawValue();
-    /**
-     * TODO: Login Logic after creating a registration.
-     */
+    const userData: { userNameOrEmail: string, password: string } = this.loginForm.getRawValue();
+
+    this.authenticationService.login(userData)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          this.toastr.error(error.error, 'Can not login. Please check the data');
+          return throwError(error);
+        }))
+      .subscribe((user: User) => {
+        this.toastr.success('Successful login as: ' + user.name);
+        setTimeout(() => {
+          this.router.navigate(['/all'])
+            .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
+        }, 500);
+      });
   }
 
   public register(): void {
     this.router.navigate(['/registry'])
       .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
+  }
+
+  private createLoginForm(): void {
+    this.loginForm = new FormGroup({
+      userNameOrEmail: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    });
   }
 
   private validateForm(): Observable<boolean> {
