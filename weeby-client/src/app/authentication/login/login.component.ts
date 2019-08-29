@@ -8,6 +8,7 @@ import {catchError} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {User} from '../model/user';
 import {AuthenticationService} from '../logic/authentication.service';
+import {UserService} from '../../security/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   private loginForm: FormGroup;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router, private toastr: ToastrService) {
+  constructor(private userService: UserService, private authenticationService: AuthenticationService, private router: Router, private toastr: ToastrService) {
   }
 
   public ngOnInit(): void {
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit {
         }))
       .subscribe((user: User) => {
         this.toastr.success('Successful login as: ' + user.name);
+        this.userService.synchronizeUser(user);
+
         setTimeout(() => {
           this.router.navigate(['/all'])
             .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
