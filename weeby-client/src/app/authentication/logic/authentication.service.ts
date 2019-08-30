@@ -38,8 +38,7 @@ export class AuthenticationService {
       .pipe(
         catchError((error: HttpErrorResponse) => {
           return throwError(error);
-        })
-      );
+        }));
   }
 
   private createUser(userData: any): User {

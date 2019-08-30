@@ -58,7 +58,7 @@ export class RegistryComponent implements OnInit {
     this.authenticationService.registry(userData)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          this.toastr.error(error.error, 'Can not create account. Please check the data');
+          this.toastr.error(error.error, 'Can not create account.');
           return throwError(error);
         }))
       .subscribe((user: User) => {
