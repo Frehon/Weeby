@@ -31,12 +31,12 @@ public class AuthenticationController {
         }
     }
 
-    @PostMapping(value = "/login")
+    /*@PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody UserDto userDto) {
         try {
             return new ResponseEntity<>(ucLogin.login(userDto), HttpStatus.OK);
         } catch (AuthenticationException authExc) {
             return new ResponseEntity<>(authExc.getMessage(), HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 }
