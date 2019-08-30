@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           this.toastr.error(error.error, 'Can not login. Please check the data');
           return throwError(error);
         }))
-      .subscribe((user: User) => {
+      .subscribe((user: any) => {
         this.toastr.success('Successful login as: ' + user.name);
         this.userService.synchronizeUser(user);
 

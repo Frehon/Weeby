@@ -2,7 +2,6 @@ package com.gogol.weebyserver.authentication.rest;
 
 import com.gogol.weebyserver.authentication.exception.AuthenticationException;
 import com.gogol.weebyserver.authentication.logic.api.UcCreateUser;
-import com.gogol.weebyserver.authentication.logic.api.UcLogin;
 import com.gogol.weebyserver.authentication.model.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,22 +18,10 @@ public class AuthenticationController {
     @Autowired
     private UcCreateUser ucCreateUser;
 
-    @Autowired
-    private UcLogin ucLogin;
-
     @PostMapping(value = "/create")
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
         try {
             return new ResponseEntity<>(ucCreateUser.createUser(userDto), HttpStatus.CREATED);
-        } catch (AuthenticationException authExc) {
-            return new ResponseEntity<>(authExc.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PostMapping(value = "/login")
-    public ResponseEntity<?> login(@RequestBody UserDto userDto) {
-        try {
-            return new ResponseEntity<>(ucLogin.login(userDto), HttpStatus.OK);
         } catch (AuthenticationException authExc) {
             return new ResponseEntity<>(authExc.getMessage(), HttpStatus.BAD_REQUEST);
         }
