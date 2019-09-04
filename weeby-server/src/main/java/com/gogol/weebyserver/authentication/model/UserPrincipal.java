@@ -10,9 +10,11 @@ import java.util.Collections;
 public class UserPrincipal implements UserDetails {
 
     private User user;
+    private String role;
 
-    public UserPrincipal(User user) {
+    public UserPrincipal(User user, String role) {
         this.user = user;
+        this.role = role;
     }
 
     @Override
@@ -22,12 +24,12 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.user.getName();
     }
 
     @Override
@@ -48,5 +50,21 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -1,5 +1,8 @@
 package com.gogol.weebyserver.setup.testdata;
 
+import com.gogol.weebyserver.authentication.configuration.SecurityConfiguration;
+import com.gogol.weebyserver.authentication.model.User;
+import com.gogol.weebyserver.authentication.repository.UserRepository;
 import com.gogol.weebyserver.masterdata.model.Post;
 import com.gogol.weebyserver.masterdata.repository.PostRepository;
 import org.slf4j.Logger;
@@ -7,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -20,12 +24,28 @@ public class StartupTestDataLoader implements ApplicationListener<ApplicationRea
     private static final Logger LOGGER = LoggerFactory.getLogger(StartupTestDataLoader.class);
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private SecurityConfiguration securityConfiguration;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         LOGGER.info("Loading posts test data");
+        setupUserTestData();
         setupPostsTestData();
+    }
+
+    private void setupUserTestData() {
+        PasswordEncoder passwordEncoder = this.securityConfiguration.passwordEncoder();
+        User user = new User();
+        user.setName("Gogol93");
+        user.setEmail("tomasz.gogolewski@hotmail.com");
+        user.setPassword(passwordEncoder.encode("anakonda123#"));
+        userRepository.save(user);
     }
 
     private void setupPostsTestData() {

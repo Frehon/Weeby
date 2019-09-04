@@ -32,6 +32,6 @@ public class UcGetUserDetails implements UserDetailsService {
         if (!loggedUser.isPresent()) {
             throw new UsernameNotFoundException("User with given email or name does not exists.");
         }
-        return new UserPrincipal(loggedUser.get());
+        return new UserPrincipal(loggedUser.get(), "USER");
     }
 }
