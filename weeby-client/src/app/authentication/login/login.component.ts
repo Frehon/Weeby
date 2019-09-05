@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(userData)
       .pipe(
         catchError((error: HttpErrorResponse) => {
-          this.toastr.error(error.error, 'Can not login. Please check the data');
+          this.toastr.error(error.error, 'Unable to perform login.');
           return throwError(error);
         }))
       .subscribe((user: any) => {

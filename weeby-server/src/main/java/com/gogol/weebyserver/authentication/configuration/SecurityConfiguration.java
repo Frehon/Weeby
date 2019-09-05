@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,6 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/auth/create").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new CrossOriginFilter(), ChannelProcessingFilter.class)
@@ -79,6 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         RequestBodyFilter authenticationFilter
                 = new RequestBodyFilter();
         authenticationFilter.setAuthenticationSuccessHandler(this::loginSuccessHandler);
+        authenticationFilter.setAuthenticationFailureHandler(this::loginFailureHandler);
         authenticationFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/auth/login", "POST"));
         authenticationFilter.setAuthenticationManager(authenticationManagerBean());
         return authenticationFilter;
@@ -88,5 +91,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         UserPrincipal loggedInUser = (UserPrincipal) authentication.getPrincipal();
         response.setStatus(HttpStatus.OK.value());
         responseMapper.writeValue(response.getWriter(), userMapper.mapUserToUserDto(loggedInUser.getUser()));
+    }
+
+    private void loginFailureHandler(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        responseMapper.writeValue(response.getWriter(), "Wrong credentials or account does not exists.");
     }
 }
