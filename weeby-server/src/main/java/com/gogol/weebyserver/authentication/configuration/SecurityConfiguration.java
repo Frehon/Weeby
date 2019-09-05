@@ -72,7 +72,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/create").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new CrossOriginFilter(), ChannelProcessingFilter.class)
                 .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
