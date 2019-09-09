@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
-import {Observable, throwError, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {Errors} from '../model/errors';
 import {catchError} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -17,7 +17,7 @@ import {UserService} from '../../security/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(private userService: UserService, private authenticationService: AuthenticationService, private router: Router, private toastr: ToastrService) {
   }
@@ -31,24 +31,26 @@ export class LoginComponent implements OnInit {
       catchError((error: Observable<never>) => {
         this.toastr.error(Errors.invalidForm);
         return throwError(error);
-      }));
+      }))
+      .subscribe(() => {
 
-    const userData: { userNameOrEmail: string, password: string } = this.loginForm.getRawValue();
+        const userData: { userNameOrEmail: string, password: string } = this.loginForm.getRawValue();
 
-    this.authenticationService.login(userData)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.toastr.error(error.error, 'Unable to perform login.');
-          return throwError(error);
-        }))
-      .subscribe((user: User) => {
-        this.toastr.success('Successful login as: ' + user.name);
-        this.userService.synchronizeUser(user);
+        this.authenticationService.login(userData)
+          .pipe(
+            catchError((error: HttpErrorResponse) => {
+              this.toastr.error(error.error, 'Unable to perform login.');
+              return throwError(error);
+            }))
+          .subscribe((user: User) => {
+            this.toastr.success('Successful login as: ' + user.name);
+            this.userService.synchronizeUser(user);
 
-        setTimeout(() => {
-          this.router.navigate(['/all'])
-            .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
-        }, 500);
+            setTimeout(() => {
+              this.router.navigate(['/all'])
+                .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message));
+            }, 500);
+          });
       });
   }
 
