@@ -1,7 +1,6 @@
 package com.gogol.weebyserver.authentication.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gogol.weebyserver.authentication.configuration.filer.CrossOriginFilter;
 import com.gogol.weebyserver.authentication.configuration.filer.RequestBodyFilter;
 import com.gogol.weebyserver.authentication.logic.mapper.UserMapper;
 import com.gogol.weebyserver.authentication.model.UserPrincipal;
@@ -20,7 +19,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 

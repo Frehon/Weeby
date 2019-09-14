@@ -20,6 +20,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {PostRestService} from './usecase/logic/post-rest.service';
 import {RegistryComponent} from './authentication/registry/registry.component';
 import {ToastrModule} from 'ngx-toastr';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {SharedModule} from "./shared/shared.module";
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -37,6 +39,7 @@ export const routes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(routes),
+    SharedModule,
     BrowserModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
@@ -53,7 +56,8 @@ export const routes: Routes = [
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       extendedTimeOut: 3000
-    })
+    }),
+    MatProgressBarModule
   ],
   providers: [PostRestService],
   bootstrap: [AppComponent]
