@@ -20,7 +20,7 @@ export class AuthenticationService {
     return this.authenticate(detailUrl, userData);
   }
 
-  public login(userData: { userNameOrEmail: string, password: string }): Observable<User> {
+  public login(userData: { userNameOrEmail: string, password: string }): Observable<User | HttpErrorResponse> {
     const detailUrl = '/login';
     let parsedUserData: { userName: string; email: string; password: string } = {userName: undefined, email: undefined, password: ''};
     if (userData.userNameOrEmail.match(Constants.emailRegexp)) {

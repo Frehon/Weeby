@@ -18,7 +18,7 @@ import {Router} from '@angular/router';
 })
 export class RegistryComponent implements OnInit {
 
-  private registryForm: FormGroup;
+  registryForm: FormGroup;
 
   constructor(private authenticationService: AuthenticationService, private router: Router, private toastr: ToastrService) {
   }
@@ -62,7 +62,7 @@ export class RegistryComponent implements OnInit {
           return throwError(error);
         }))
       .subscribe((user: User) => {
-        this.toastr.success('User has been created successfully! Redirecting to login page.');
+        this.toastr.success('User ' + user.name + ' has been created successfully! Redirecting to login page.');
         setTimeout(() => this.router.navigate(['/login'])
           .catch((error: any) => this.toastr.error(Errors.redirectingError + error.message)), 1500);
       });
