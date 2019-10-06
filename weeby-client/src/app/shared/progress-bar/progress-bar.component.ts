@@ -7,9 +7,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ProgressBarComponent implements OnInit {
 
+  public progressPercent: number;
+  public maxProgressPercent: number;
+
   constructor() { }
 
   ngOnInit() {
+    this.progressPercent = 0;
+    this.maxProgressPercent = 100;
   }
 
 }

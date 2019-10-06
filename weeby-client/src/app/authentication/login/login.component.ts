@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ToastrService} from 'ngx-toastr';
@@ -9,6 +9,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {User} from '../model/user';
 import {AuthenticationService} from '../logic/authentication.service';
 import {UserService} from '../../security/user.service';
+import {ProgressBarComponent} from "../../shared/progress-bar/progress-bar.component";
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,9 @@ import {UserService} from '../../security/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild(ProgressBarComponent, {static: false})
+  progressBar: ProgressBarComponent;
 
   loginForm: FormGroup;
 
@@ -27,13 +31,13 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
+    this.loadProgressBar(50);
     this.validateForm().pipe(
       catchError((error: Observable<never>) => {
         this.toastr.error(Errors.invalidForm);
         return throwError(error);
       }))
       .subscribe(() => {
-
         const userData: { userNameOrEmail: string, password: string } = this.loginForm.getRawValue();
 
         this.authenticationService.login(userData)
@@ -43,6 +47,7 @@ export class LoginComponent implements OnInit {
               return throwError(error);
             }))
           .subscribe((user: User) => {
+            this.loadProgressBar(100);
             this.toastr.success('Successful login as: ' + user.name);
             this.userService.synchronizeUser(user);
 
@@ -71,5 +76,9 @@ export class LoginComponent implements OnInit {
       return throwError(Errors.invalidForm);
     }
     return of(true);
+  }
+
+  private loadProgressBar(percent: number) {
+    this.progressBar.progressPercent = percent;
   }
 }
