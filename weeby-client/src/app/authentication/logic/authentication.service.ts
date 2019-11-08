@@ -22,7 +22,11 @@ export class AuthenticationService {
 
   public login(userData: { userNameOrEmail: string, password: string }): Observable<User | HttpErrorResponse> {
     const detailUrl = '/login';
-    let parsedUserData: { userName: string; email: string; password: string } = {userName: undefined, email: undefined, password: ''};
+    let parsedUserData: { userName: string; email: string; password: string } = {
+      userName: undefined,
+      email: undefined,
+      password: ''
+    };
     if (userData.userNameOrEmail.match(Constants.emailRegexp)) {
       parsedUserData.email = userData.userNameOrEmail;
     } else {
